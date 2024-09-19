@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class SentimentAnalysisModel(ABC):
     """Interface for sentiment analysis models."""
 

@@ -1,6 +1,7 @@
 from transformers import pipeline
 from .sentiment_analysis import SentimentAnalysisModel
 
+
 class TransformersSentimentAnalysis(SentimentAnalysisModel):
     """Sentiment analysis using the transformers pipeline."""
 
@@ -16,5 +17,7 @@ class TransformersSentimentAnalysis(SentimentAnalysisModel):
         :return: A polarity score between -1.0 (negative) and 1.0 (positive).
         """
         result = self.sentiment_pipeline(text)
-        score = result[0]['score'] if result[0]['label'] == "POSITIVE" else -result[0]['score']
-        return score
+        if result[0]['label'] == "POSITIVE":
+            return result[0]['score']
+        else:
+            return -result[0]['score']

@@ -18,8 +18,9 @@ def test_get_comments():
         'name' : 'Dummy Topic 2',
     }
     response = requests.get(BASE_URL, params=params)
-    assert response.status_code == 200
     data = response.json()
+
+    assert response.status_code == 200    
     assert len(data) > 0
     assert list(data[0].keys()) == ['category', 'id', 'score', 'text']
     for d in data:
