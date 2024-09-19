@@ -1,6 +1,6 @@
 name: Lint and Test
 
-on: [push, pull_request]  # Se ejecutará en cada push y en los pull requests
+on: [push, pull_request] 
 
 jobs:
   build:
@@ -23,8 +23,8 @@ jobs:
 
     - name: Lint with Flake8
       run: |
-        flake8 app/  # Corre flake8 solo en la carpeta app/
+        flake8 app/
     
     - name: Run tests with pytest
       run: |
-        pytest test/  # Corre pytest en la carpeta de tests
+        pytest test/
