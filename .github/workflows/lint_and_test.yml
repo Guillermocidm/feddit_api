@@ -1,0 +1,30 @@
+name: Lint and Test
+
+on: [push, pull_request]  # Se ejecutará en cada push y en los pull requests
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8"]
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+
+    - name: Lint with Flake8
+      run: |
+        flake8 app/  # Corre flake8 solo en la carpeta app/
+    
+    - name: Run tests with pytest
+      run: |
+        pytest test/  # Corre pytest en la carpeta de tests
