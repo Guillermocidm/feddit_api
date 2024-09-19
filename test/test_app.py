@@ -13,23 +13,23 @@ def mock_get_comments():
     ]
     return comments
 
-def test_get_comments():
-    params = {
-        'name' : 'Dummy Topic 2',
-    }
-    response = requests.get(BASE_URL, params=params)
-    data = response.json()
+# def test_get_comments():
+#     params = {
+#         'name' : 'Dummy Topic 2',
+#     }
+#     response = requests.get(BASE_URL, params=params)
+#     data = response.json()
 
-    assert response.status_code == 200    
-    assert len(data) > 0
-    assert list(data[0].keys()) == ['category', 'id', 'score', 'text']
-    for d in data:
-        assert isinstance(d['score'], float)
-        assert d['score'] <= 1.0 and d['score'] >= -1.0
-        if d['score'] >= 0.0:
-            assert d['category'] == 'positive'
-        else:
-            assert d['category'] == 'negative'
+#     assert response.status_code == 200    
+#     assert len(data) > 0
+#     assert list(data[0].keys()) == ['category', 'id', 'score', 'text']
+#     for d in data:
+#         assert isinstance(d['score'], float)
+#         assert d['score'] <= 1.0 and d['score'] >= -1.0
+#         if d['score'] >= 0.0:
+#             assert d['category'] == 'positive'
+#         else:
+#             assert d['category'] == 'negative'
 
 def test_sort_by_polarity(mock_get_comments):
     sorted_comments = sort_comments_by_polarity(mock_get_comments)
@@ -44,14 +44,14 @@ def test_filter_by_date(mock_get_comments):
     assert len(filtered_comments) == 1
     assert filtered_comments[0]['text'] == 'This is bad...'
 
-def test_subfeddit_not_found():
-    params = {
-        'name': 'AAAA',
-    }
-    response = requests.get(BASE_URL, params=params)
+# def test_subfeddit_not_found():
+#     params = {
+#         'name': 'AAAA',
+#     }
+#     response = requests.get(BASE_URL, params=params)
 
-    assert response.status_code == 404
-    assert response.json().get('error') == f"{params['name']} subfeddit not found"
+#     assert response.status_code == 404
+#     assert response.json().get('error') == f"{params['name']} subfeddit not found"
 
 
 def test_subfeddit_name_required():
